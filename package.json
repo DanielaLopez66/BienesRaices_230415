@@ -3,6 +3,8 @@
   "version": "1.0.0",
   "description": "Proyecto de clase para la unidad 2 de la asignatura AWOS utilizando Node.js",
   "main": "index.js",
+  "type": "module",
+  
   "scripts": {
     "saluda": "node index.js",
     "server": "nodemon index.js"
@@ -17,10 +19,9 @@
     "Sequelize",
     "MySQL",
     "Tailwind",
-    "NodeMaller",
-    "Node",
-    "JS",
-    "Mailtrao",
+    "Nodemon",
+    "NodeJS",
+    "Mailtrap",
     "JWT"
   ],
   "author": "Ana Daniela Lopez Neri",
