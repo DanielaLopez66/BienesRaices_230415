@@ -1,25 +1,27 @@
-import express from 'express';
-//const express=require(`express`);//Importar la libreria 
+//ECMa Script 6
+//Comman16
 
-//Ibstanciar nuestra aplicacion web 
-const app= express()
+
+import express from 'express';
+import generalRoutes from './routes/generalRoutes.js'
+import userRoutes from './routes/userRoutes.js'
+
+
+//const express= require(`express`); //declaración de objeto que permite entrar al protocolo http y leer páginas
+//importar la libreria para crear un servidos web
+
+//Instanciar nuestra aplicación web
+const app=express()
 
 //configuramos nuestro servidor web
-const port =3000;
+const port= 3000; 
 app.listen(port, ()=>{
-    console.log(`La aplicacion ha iniciado en el puerto: ${port}`)
+    console.log(`La aplicación ha iniciado en el puerto: ${port}`);
 })
 
-//probamos las rutas para pider presentar mensajes al usuario a traves dekl navegador
-app.get("/", function(req,res){
-    res.send("Hola mundo desde node, a traves del navegador")
-})
 
-app.get("/QuienSoy", function(req,res){
-    res.json({"estudiante": "Ana Daniela López Neri",
-        "carrera": "TI DSM",
-        "grado": "4",
-        "grupo": "B",
-        "asignatura": "Aplicaciones Web Orientadas a Servicios(AWOS)"
-    });
-})
+//Routing - Enrutamiento
+app.use('/',generalRoutes);
+app.use('/usuario/',userRoutes);
+
+// Probamos las rutas para poder presentar mensajes al usuario a traves del navegador
