@@ -15,5 +15,5 @@ router.get("/QuienSoy", function(req, res){
     })
 })
 
-export default router; //Esta palabra reservada de JS me permite exportar los elementos definidos y utilizarlos en otros archivos del mismo sitio. 
+export default router; //Esta palabra reservada de JS me permite exportar los elementos definidos y utilizarlos en otros archivos del mismo sitio.
 
