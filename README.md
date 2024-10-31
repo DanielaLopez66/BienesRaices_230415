@@ -8,6 +8,7 @@ Para poder demostrar y aprender la creación y consumo de Interfaces de programa
 |No.|Fecha | Descripción|Potenciador|Estatus|
 |--|--|--|--|--|
 |8.|17/10/2024|Nuevo repositorio del Proyecto implementado .gitigmore|1|✨Activa|
+|9.|22/10/2024|Creación de una Aplicación web usando Express|11|🌟 Activa|
 
 ## Autor 
 **Ana Daniela López Neri**/ [@DanielaLopez66](https://github.com/DanielaLopez66)
