@@ -1,7 +1,26 @@
-extend ../layout/index
+extends  ../layout/index
 block contenido
     div 
         h2.text-center.font-extrabold.my-10.text-4xl.text-indigo-600 Bienes 
           span.font-normal.text-black Raices 
-        h2.text-center.font-extrabold.text-2x1 Crea tu cuenta
-    
+        h2.text-center.font-extrabold.text-2x1= page 
+
+        .mt-8.mx-auto.max-w-md   
+           .bd-white.py-8.px-4.shadown  
+              form(action="")
+                  div  
+                     labe.block.text-sm.uppercase.text-gray-600.mb-2.font-hold Nombre Completo: 
+                     input#name.w-full.px-3.py-2.border.border-gray3.rounded-xl.placeholder.gray-400(type="text" placeholder="Ingresa tu nombre con apellidos") 
+
+                  div  
+                     labe.block.text-sm.uppercase.text-gray-600.mb-2.font-hold Correo Electronico: 
+                     input#email.w-full.px-3.py-2.border.border-gray3.rounded-xl.placeholder.gray-400(type="email" placeholder="ej.usuario@dominio.com" name="correo_usuario")       
+
+                  div  
+                     labe.block.text-sm.uppercase.text-gray-600.mb-2.font-hold Contraseña: 
+                     input#password.w-full.px-3.py-2.border.border-gray3.rounded-xl.placeholder.gray-400(type="password" placeholder="Minimo de 8 caracteres, igual a la anterior" name="pass2_usuario")               
+
+                  div 
+                    a.text-gray-500.text-xs(href="/auth/login") ¿Ya tienes cuenta? Inicia sesión 
+                    a.text-gray-500.text-xs(href="/auth/olvide-password") Olvide mi contraseña 
+                  
