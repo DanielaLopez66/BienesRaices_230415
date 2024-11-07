@@ -1,13 +1,13 @@
 {
   "name": "mx.edu.utxj.ti.awos.bienes-raices",
   "version": "1.0.0",
-  "description": "Proyecto de clase para la unidad 2 de la asignatura AWOS utilizando Node.js",
+  "description": "Proyecto de Clase para la Unidad 2, de la asignatura AWOS utilizando Node.js",
   "main": "index.js",
   "type": "module",
   "scripts": {
     "saluda": "node saluda.js",
     "server": "nodemon index.js",
-    "css": "postcss public/css/tailwind.css -o public/css/app.css"
+    "css": "postcss public/css/tailwind.css -o public/css/app.css --watch"
   },
   "repository": {
     "type": "git",
@@ -16,8 +16,8 @@
   "keywords": [
     "MVC",
     "Express",
-    "Sequelize",
-    "MySQL",
+    "Sequielize",
+    "MyAQL",
     "Tailwind",
     "Nodemon",
     "NodeJS",
@@ -27,20 +27,18 @@
   "author": "Ana Daniela Lopez Neri",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/DanielaLopez66/BienesRaices_230415/issues"
+    "url": "https://github.com/RufinoAngel/BienesRaices-230499/issues"
   },
   "homepage": "https://github.com/DanielaLopez66/BienesRaices_230415#readme",
+  "dependencies": {
+    "express": "^4.21.1",
+    "pug": "^3.0.3"
+  },
   "devDependencies": {
-    "autoprefixer": "10.4.20",
+    "autoprefixer": "^10.4.20",
     "nodemon": "^3.1.7",
     "postcss": "^8.4.47",
     "postcss-cli": "^11.0.0",
     "tailwindcss": "^3.4.14"
-  },
-  "dependencies": {
-    "css": "^3.0.0",
-    "pug": "^3.0.3",
-    "run": "^1.5.0",
-    "server": "^1.0.41"
   }
 }
