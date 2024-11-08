@@ -9,8 +9,6 @@ export default {
         verde:'#BCFFF0',
         morado:'#D0B0FF',
         amarillo:'#FFFFC9',
-
-
       },
     },
   },
