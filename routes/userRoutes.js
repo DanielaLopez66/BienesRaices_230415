@@ -1,5 +1,5 @@
 import express from 'express';
-import { formularioLogin,formularioRegister,formularioPasswordRecovery } from '../controllers/userController.js';
+import { formularioLogin,formularioRegister,formularioPasswordRecovery, createNewuser } from '../controllers/userController.js';
 
 const router =  express.Router();
 
@@ -16,6 +16,8 @@ router.get("/busquedaPorID/:id", function (request, response){
 router.post("/new/:name/:email/:password", function(req,res){
     res.send(`Se ha solicitado la creación de un nuevo usuario de nombre: ${req.params.name}, asociando el correo electronico: ${req.params.email} con la contraseña: ${req.params.password}`)
 })
+
+router.post("/newUser", createNewUser)
 
 //PUT - se utiliza para la actualización total de información del cliente al servidor
 router.put("/replaceUserByEmail/:name/:email/:password", function(a,b){

@@ -4,11 +4,25 @@
 import express from 'express';
 import generalRoutes from './routes/generalRoutes.js'
 import userRoutes from './routes/userRoutes.js'
+import db from '../db/config.js'
 //const express = require('express'); //DECLARANDO UN OBJETO QUE VA A PERMITIR LEER PAGINAS ETC.importar la libreria para crear un servidor web
 
 //INSTANCIAR NUESTRA APLICACIÓN WEB
 
 const app = express();
+
+// Conexion a la base de datos
+try{
+  await db.authenticate();
+  db.sync(); 
+  console.log('Conexion correcta a la base de datos')
+
+}catch(error){
+
+  console.log(error)
+}
+
+app.use(express.urlencoded((encoded:true)))
 
 //Definir la carpeta pública de recursos estáticos (assets)
 app.use(express.static('./public'));
