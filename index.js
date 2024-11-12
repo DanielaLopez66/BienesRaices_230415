@@ -6,8 +6,11 @@ import generalRoutes from './routes/generalRoutes.js';
 import userRoutes from './routes/userRoutes.js';
 import db from './db/config.js';
 //const express = require('express'); //DECLARANDO UN OBJETO QUE VA A PERMITIR LEER PAGINAS ETC.importar la libreria para crear un servidor web
-
+const app = express();
 //INSTANCIAR NUESTRA APLICACIÓN WEB
+
+// Hanilitar lectura de datos de formularios 
+app.use(express.urlencoded({extended:true}))
 //conexion a la Base de Datos
 try{
   await db.authenticate(); //verifico las credenciales del usuario 
@@ -18,14 +21,8 @@ try{
 }
 
 
-const app = express();
-
 //Definir la carpeta pública de recursos estáticos (assets)
 app.use(express.static('./public'));
-
-
-//Habilitar la lectura de datos desde formularios
-app.use(express.urlencoded({encoded:true}));
 
 
 //CONFIGURAMOS NUESTRO SERVIDOR WEB (puerto donde estara escuchando nuestro sitio web)
