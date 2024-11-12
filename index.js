@@ -2,30 +2,31 @@
 // commin JS
 
 import express from 'express';
-import generalRoutes from './routes/generalRoutes.js'
-import userRoutes from './routes/userRoutes.js'
-import db from '../db/config.js'
+import generalRoutes from './routes/generalRoutes.js';
+import userRoutes from './routes/userRoutes.js';
+import db from './db/config.js';
 //const express = require('express'); //DECLARANDO UN OBJETO QUE VA A PERMITIR LEER PAGINAS ETC.importar la libreria para crear un servidor web
 
 //INSTANCIAR NUESTRA APLICACIÓN WEB
-
-const app = express();
-
-// Conexion a la base de datos
+//conexion a la Base de Datos
 try{
-  await db.authenticate();
-  db.sync(); 
-  console.log('Conexion correcta a la base de datos')
-
+  await db.authenticate(); //verifico las credenciales del usuario 
+  db.sync();
+  console.log('Conexion Correcta a la Base DE Datos')
 }catch(error){
-
   console.log(error)
 }
 
-app.use(express.urlencoded((encoded:true)))
+
+const app = express();
 
 //Definir la carpeta pública de recursos estáticos (assets)
 app.use(express.static('./public'));
+
+
+//Habilitar la lectura de datos desde formularios
+app.use(express.urlencoded({encoded:true}));
+
 
 //CONFIGURAMOS NUESTRO SERVIDOR WEB (puerto donde estara escuchando nuestro sitio web)
 const port = 3000;
@@ -44,3 +45,4 @@ app.use('/auth/', userRoutes);
 app.set('view engine','pug')
 app.set('views','./views')//se define donde tendrá el proyecto las vistas
 //auth -> auntentificación
+

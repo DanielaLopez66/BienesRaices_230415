@@ -1,5 +1,4 @@
-import { response } from "express";
-import User from '..models/User.js'
+import User from "../models/User.js";
 
 const formularioLogin=(req,res)=>{
     res.render('auth/login',{
@@ -19,17 +18,20 @@ const formularioPasswordRecovery = (request,response)=>{
     response.render('auth/passwordRecovery',{
         page: "Recuperación de Contraseña"
     })
-};
-const createNewUser = (request, response)=>{
-    console.log("Registrando a un nuevo usuario")
-    console.log(request.body)
-    //Registramos los datos en la base de datos
-    const newUser = await User.create(request.body);
-    response
+}
+
+const createNewUser= async(req,res)=>{
+    console.log("Registrando un nuevo usuario")
+    console.log(req.body);
+    const newUser=await User.create({
+        name:req.body.nombre_usuario,
+        email:req.body.correo_usuario,
+        password:req.body.pass_usuario,
+    });
 
 }
 
-export {formularioLogin,formularioRegister,formularioPasswordRecover, createNewUser}
+export {formularioLogin,formularioRegister,formularioPasswordRecovery,createNewUser}
 
 
 
