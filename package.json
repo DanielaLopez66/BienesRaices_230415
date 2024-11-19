@@ -37,7 +37,9 @@
     "express-validator": "^7.2.0",
     "mysql": "^2.18.1",
     "mysql2": "^3.11.4",
+    "nodemailer": "^6.9.16",
     "pug": "^3.0.3",
+    "run": "^1.5.0",
     "sequelize": "^6.37.5"
   },
   "devDependencies": {

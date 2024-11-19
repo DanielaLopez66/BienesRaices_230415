@@ -3,6 +3,7 @@ import User from "../models/User.js";
 import { where } from 'sequelize';
 import { request, response } from 'express';
 import {generatetId} from '../Helpers/tokens.js';
+import {emailAfterRegister} from '../Helpers/email.js'
 
 const formularioLogin=(req,res)=>{
     res.render('auth/login',{
@@ -75,6 +76,18 @@ const createNewUser= async(req,res)=>{
     response.json(newUser);
     return;
 
+}
+emailAfterRegister({
+    name:newUser.name,
+    email:newUser.email,
+    token:newUser.token
+})
+const confirm = () =>
+{
+    //validarToken -Si existe
+    //confirmar cuenta
+    //enviar mensaje
+    console.log(`Intentando confirmar la cuenta con el token: ${request.params.token}`)
 }
 
 export {formularioLogin,formularioRegister,formularioPasswordRecovery,createNewUser}
