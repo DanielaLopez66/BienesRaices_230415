@@ -2,7 +2,7 @@ import { check, validationResult } from "express-validator";
 import User from "../models/User.js";
 import { generateId } from "../helpers/tokens.js";
 import { registerEmail } from '../helpers/email.js';
-import { where } from "sequelize";
+import moment from 'moment';  // Importamos moment
 
 const formularioLogin = (req, res) => {
     res.render('auth/login', {
@@ -14,14 +14,14 @@ const formularioLogin = (req, res) => {
 const formularioRegister = (request, response) => {
     response.render('auth/register', {
         page: "Crea una Nueva Cuenta...",
-        csrfToken : request.csrfToken()
+        csrfToken: request.csrfToken()
     });
 };
 
 const formularioPasswordRecovery = (request, response) => {
     response.render('auth/passwordRecovery', {
         page: "Recuperación de Contraseña",
-        csrfToken : request.csrfToken()
+        csrfToken: request.csrfToken()
     });
 };
 
@@ -45,32 +45,30 @@ const resetPassword = async (req, res) => {
 
     // Buscar el usuario
     const user = await User.findOne({ where: { email: correo_usuario } });
-    if(!user){
+    if (!user) {
         return res.render('auth/passwordRecovery', {
             page: 'Recupera tu acceso a Bienes Raices',
             csrfToken: req.csrfToken(),
-            errors: [{msg:'UPSSS, El Correo no Pertenece a ningún usuario'}]
+            errors: [{ msg: 'UPSSS, El Correo no Pertenece a ningún usuario' }]
         });
     }
-    //Generar un token y enviar un email
-    user.token=generateId();
+    // Generar un token y enviar un email
+    user.token = generateId();
     await user.save();
 
-    //Enviar un Email
+    // Enviar un Email
     passwordRecoveryEmail({
         email: user.email,
         name: user.name,
         token: user.token
+    });
 
-    })
-    //Renderizar un mensaje 
-    res.render('templates/message',{
-        page:'Restablece tu Contraseña',
-        msg:`Hemos Enviado un Email con las instrucciones para Reestablecer su contraseña`
-    })
-
+    // Renderizar un mensaje 
+    res.render('templates/message', {
+        page: 'Restablece tu Contraseña',
+        msg: `Hemos Enviado un Email con las instrucciones para Reestablecer su contraseña`
+    });
 };
-
 
 const createNewUser = async (req, res) => {
     // Validación de los campos que se reciben del formulario
@@ -78,6 +76,10 @@ const createNewUser = async (req, res) => {
     await check('correo_usuario')
         .notEmpty().withMessage('El correo electrónico es un campo obligatorio')
         .isEmail().withMessage('El correo electrónico no tiene el formato correcto')
+        .run(req);
+    await check('fecha_nacimiento')
+        .notEmpty().withMessage('La fecha de nacimiento es obligatoria')
+        .isDate().withMessage('La fecha de nacimiento no tiene el formato correcto')
         .run(req);
     await check('pass_usuario')
         .notEmpty().withMessage('La contraseña es un campo obligatorio')
@@ -96,9 +98,9 @@ const createNewUser = async (req, res) => {
             page: 'Error al intentar crear una cuenta',
             csrfToken: req.csrfToken(),
             errors: resultado.array(),
-            User:{
-                name:req.body.name,
-                email:req.body.correo_usuario
+            User: {
+                name: req.body.name,
+                email: req.body.correo_usuario
             }
         });
     } else {
@@ -106,70 +108,69 @@ const createNewUser = async (req, res) => {
         console.log(req.body);
     }
 
-    const { name, correo_usuario: email, pass_usuario: password } = req.body;
+    const { name, correo_usuario: email, pass_usuario: password, fecha_nacimiento } = req.body;
 
-    // Verificamos que el usuario no existe previamente en la BD
+    // Verificamos que el usuario no exista previamente en la BD
     const existingUser = await User.findOne({ where: { email } });
     if (existingUser) {
         return res.render('auth/register', {
-            page: 'Error al intentar crear una cuenta',
-            csrfToken: req.csrfToken(),
+            page: 'Error al intentar crear la cuenta de Usuario',
             errors: [{ msg: `El usuario ${email} ya está registrado.` }],
-            User:{
-                name:req.body.name,
-                email:req.body.correo_usuario
-            }
+            nombre_usuario: name,
+            correo_usuario: email,
+            fecha_nacimiento,
         });
     }
-    
+
+    // Convertir la fecha de nacimiento a UTC usando moment
+    const fechaNacimiento = moment(fecha_nacimiento).utc().format('YYYY-MM-DD HH:mm:ss');
+
     // Registramos los datos en la BD
-    const newUser =await User.create({
+    const newUser = await User.create({
         name,
         email,
-        password, 
+        password,
+        fecha_nacimiento: fechaNacimiento,
         token:generateId()
     });
-    //Envia un email de confirmacion 
+
+    // Enviar un email de confirmación 
     registerEmail({
         name: newUser.name,
         email: newUser.email,
         token: newUser.token
-    }) 
+    });
 
-    
-    //Mostrar mensaje de confirmación 
-    res.render('templates/message',{
-        page:'Cuenta Creada Correctamente',
-        msg:`Hemos Enviado un Email de Confirmación a ${email}, presione en el enlace`
-    })
+    // Mostrar mensaje de confirmación 
+    res.render('templates/message', {
+        page: 'Cuenta Creada Correctamente',
+        msg: `Hemos Enviado un Email de Confirmación a ${email}, presione en el enlace`
+    });
 };
-//Funcion que comprueba una cuenta 
-const confirm=async (req,res)=>{
 
-    const {token}=req.params;
-    //Verificamos si el token es valido
-    const user= await User.findOne({where:{token}})
-    if(!user){
-        return res.render('auth/confirmAccount',{
-            page:'Error al confirmar tu cuenta...',
-            msg:'Hubo un error al confirmar tu cuenta, intenta de nuevo..',
-            error:true
-        })
+// Función que comprueba una cuenta 
+const confirm = async (req, res) => {
+    const { token } = req.params;
+    // Verificamos si el token es válido
+    const user = await User.findOne({ where: { token } });
+    if (!user) {
+        return res.render('auth/confirmAccount', {
+            page: 'Error al confirmar tu cuenta...',
+            msg: 'Hubo un error al confirmar tu cuenta, intenta de nuevo..',
+            error: true
+        });
     }
 
     // Confirmar Cuenta
-    user.token=null;
-    user.confirmed=true;
+    user.token = null;
+    user.confirmed = true;
     await user.save();
-    res.render('auth/confirmAccount',{
-        page:'Cuenta Confirmada',
-        msg:'La cuenta se ha confirmado Correctamente ',
-        error:false
-    })
-}
-
-
-
+    res.render('auth/confirmAccount', {
+        page: 'Cuenta Confirmada',
+        msg: 'La cuenta se ha confirmado Correctamente ',
+        error: false
+    });
+};
 
 export {
     formularioLogin,

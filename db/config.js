@@ -5,6 +5,7 @@ const db = new Sequelize (process.env.DB_NAME,process.env.DB_USER,process.env.DB
     host: process.env.DB_DOMAIN,
     port: process.env.DB_PORT,
     dialect: 'mysql',
+    timezone:'-06:00',
     define:{
         timetamps: true
     },
