@@ -1,7 +1,8 @@
 import {DataTypes} from 'sequelize'
 import db from '../db/config.js'
+import bcrypt from 'bcrypt';
 
-const User=db.define('tb_users',{
+const User=db.define('tbb_users',{
     name:{
         type:DataTypes.STRING,
         allownull:false
