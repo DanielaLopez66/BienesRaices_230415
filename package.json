@@ -17,7 +17,7 @@
     "MVC",
     "Express",
     "Sequielize",
-    "MyAQL",
+    "MySQL",
     "Tailwind",
     "Nodemon",
     "NodeJS",
@@ -27,12 +27,22 @@
   "author": "Ana Daniela Lopez Neri",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/RufinoAngel/BienesRaices-230499/issues"
+    "url": "https://github.com/DanielaLopez66/BienesRaices_230415/issues"
   },
   "homepage": "https://github.com/DanielaLopez66/BienesRaices_230415#readme",
   "dependencies": {
+    "bcrypt": "^5.1.1",
+    "cookie-parser": "^1.4.7",
+    "csurf": "^1.10.0",
+    "dotenv": "^16.4.5",
     "express": "^4.21.1",
-    "pug": "^3.0.3"
+    "express-validator": "^7.2.0",
+    "mysql": "^2.18.1",
+    "mysql2": "^3.11.4",
+    "nodemailer": "^6.9.16",
+    "pug": "^3.0.3",
+    "run": "^1.5.0",
+    "sequelize": "^6.37.5"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.20",
