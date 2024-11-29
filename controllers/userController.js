@@ -3,6 +3,8 @@ import User from "../models/User.js";
 import { generateId } from "../helpers/tokens.js";
 import { registerEmail } from '../helpers/email.js';
 import moment from 'moment';  // Importamos moment
+import { request } from "express";
+import { Result } from "postcss";
 
 const formularioLogin = (req, res) => {
     res.render('auth/login', {
@@ -171,6 +173,36 @@ const confirm = async (req, res) => {
         error: false
     });
 };
+//Desestructurar los paramwtros del request
+const {correo_usuario:email}=request.body=>{
+
+//Validacion de BACKEND
+//Verificar que el usuario no eiste previamente en la bd
+    if(!result.isEmpty()){
+        console.log("Hay errores")
+        return response.render("auth/passwordRecovery",{
+            page: 'Error al intentar el resetear la contraseña',
+            errors: result.array(),
+            csrfToken: request.csrfToken()
+        })
+    }
+    //Desetructurar los parametros del request
+    const {correo_usuario:email}=> request.body
+    //Validacion de BACKEND
+    //Verificar que el usuario no existe previamente en la bd
+    const existingUser = await User.findPOne({where:{email, confirmed: 1}})
+
+    if(!existingUser){
+        return response.rendere("auth/passwordRecovery",{
+            page:'Error, no existe una cuenta autentificada asociada al correo electronico ingresado.',
+            csrfToken: request.csrfToken(),
+            errors:[{msg:`Por favor revisa los datos e intentalo de nuevo`}],
+            user:{
+                email:email
+            }
+        })
+    }
+}
 
 export {
     formularioLogin,

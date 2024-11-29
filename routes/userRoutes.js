@@ -1,5 +1,5 @@
 import express from 'express';
-import { formularioLogin,formularioRegister,formularioPasswordRecovery, createNewUser,confirm } from '../controllers/userController.js';
+import { formularioLogin,formularioRegister,formularioPasswordRecovery, createNewUser,passwordReset } from '../controllers/userController.js';
 
 const router =  express.Router();
 
@@ -48,5 +48,10 @@ router.get("/login",formularioLogin/*Middelware*/)
 router.get("/createAccount",formularioRegister)
 router.get("/passwordRecovery",formularioPasswordRecovery)
 router.get('/confirmAccount/:token', confirm);
+router.get("/passwordRecovery", formularioPasswordRecovery)
+router.post("/passwordRecovery",passwordReset);
+
+router.get("/passwordRecovery/:token", verifyTokenPasswordChange)
+router.post("/passwordRecovery/:token", updatePassword)
 
 export default router;
