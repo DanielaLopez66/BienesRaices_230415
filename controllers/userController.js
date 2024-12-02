@@ -28,10 +28,7 @@ const formularioPasswordRecovery = (request, response) => {
 };
 
 const resetPassword = async (req, res) => {
-    await check('correo_usuario')
-        .notEmpty().withMessage('El correo electrónico es un campo obligatorio')
-        .isEmail().withMessage('El correo electrónico no tiene el formato correcto')
-        .run(req);
+    await check('correo_usuario').isEmail().withMessage('El correo electrónico no tiene el formato correcto').run(req);
 
     let resultado = validationResult(req);
 
@@ -173,36 +170,6 @@ const confirm = async (req, res) => {
         error: false
     });
 };
-//Desestructurar los paramwtros del request
-const {correo_usuario:email}=request.body=>{
-
-//Validacion de BACKEND
-//Verificar que el usuario no eiste previamente en la bd
-    if(!result.isEmpty()){
-        console.log("Hay errores")
-        return response.render("auth/passwordRecovery",{
-            page: 'Error al intentar el resetear la contraseña',
-            errors: result.array(),
-            csrfToken: request.csrfToken()
-        })
-    }
-    //Desetructurar los parametros del request
-    const {correo_usuario:email}=> request.body
-    //Validacion de BACKEND
-    //Verificar que el usuario no existe previamente en la bd
-    const existingUser = await User.findPOne({where:{email, confirmed: 1}})
-
-    if(!existingUser){
-        return response.rendere("auth/passwordRecovery",{
-            page:'Error, no existe una cuenta autentificada asociada al correo electronico ingresado.',
-            csrfToken: request.csrfToken(),
-            errors:[{msg:`Por favor revisa los datos e intentalo de nuevo`}],
-            user:{
-                email:email
-            }
-        })
-    }
-}
 
 export {
     formularioLogin,
