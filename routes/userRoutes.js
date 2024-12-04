@@ -1,5 +1,5 @@
 import express from 'express';
-import { formularioLogin,formularioRegister,formularioPasswordRecovery, createNewUser, resetPassword } from '../controllers/userController.js';
+import { formularioLogin,formularioRegister,formularioPasswordRecovery,createNewUser,confirm, resetPassword,checkToken,newPassword} from '../controllers/userController.js';
 
 const router =  express.Router();
 
@@ -13,11 +13,7 @@ router.get("/busquedaPorID/:id", function (request, response){
 })   //2 componentes de una petición ruta y función callback - La ruta es la que pide la información el callback es lo que se va a hacer
 
 //POST - se utiliza para el envío de datos e información del cliente al servidor
-router.post("/new/:name/:email/:password", function(req,res){
-    res.send(`Se ha solicitado la creación de un nuevo usuario de nombre: ${req.params.name}, asociando el correo electronico: ${req.params.email} con la contraseña: ${req.params.password}`)
-})
-
-router.post("/newUser", createNewUser)
+router.post("/newUser",createNewUser)
 
 //PUT - se utiliza para la actualización total de información del cliente al servidor
 router.put("/replaceUserByEmail/:name/:email/:password", function(a,b){
@@ -46,12 +42,13 @@ router.delete("/deleteUser/:email", function(request,response){
 
 router.get("/login",formularioLogin/*Middelware*/)
 router.get("/createAccount",formularioRegister)
+router.post("/createAccount",formularioRegister)
 router.get("/passwordRecovery",formularioPasswordRecovery)
-router.get('/confirmAccount/:token', confirm);
-router.get("/passwordRecovery", formularioPasswordRecovery)
-router.post("/passwordRecovery",passwordReset);
+router.post("/passwordRecovery", resetPassword)
+router.get('/confirm/:token',confirm )
 
-router.get("/passwordRecovery/:token", verifyTokenPasswordChange)
-router.post("/passwordRecovery/:token", updatePassword)
+//Almacena el nuevo password
+router.get('/passwordRecovery/:token', checkToken)
+router.post('/passwordRecovery/:token', newPassword)
 
 export default router;
