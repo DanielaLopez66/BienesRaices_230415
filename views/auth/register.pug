@@ -2,14 +2,14 @@ extends ../layout/index
 
 block contenido
     div.py-10
-        h1.text-center.font-extrabold.my-10.text-4xl.text-amarillo Bienes 
+        h1.text-center.font-extrabold.my-10.text-4xl.text-blush-100 Bienes 
             span.font-normal.text-black Raíces
         h2.text-center.font-extrabold.text-2xl= page
 
         if errors
             div(class="max-w-md mx-auto my-10")
                 each error in errors
-                    div(class="bg-redd text-white p-4 rounded-md flex items-center justify-between mb-2 alert fade-in")
+                    div(class="bg-rojo text-white p-4 rounded-md flex items-center justify-between mb-2 alert fade-in")
                         if error.msg == "El nombre no puede ir vacío"
                             i(class="fas fa-user-times mr-2")  
                         else if error.msg == "El correo electrónico es un campo obligatorio"
@@ -45,7 +45,7 @@ block contenido
                     div.flex.items-center.justify-between
                         a.text-gray-500.text-xs(href="/auth/login" class="hover:underline decoration-2 hover:decoration-azulrey") ¿Ya tienes cuenta? Inicia Sesión
                         a.text-gray-500.text-xs(href="/auth/passwordRecovery" class="hover:underline decoration-2 hover:decoration-azulrey") Recuperar Contraseña
-                    input(class="w-full bg-rosa hover:bg-morado text-black font-bold py-3 cursor-pointer" type="submit" value="Crear Cuenta")
+                    input(class="w-full bg-thistle-400 hover:bg-thistle-200 text-black font-bold py-3 cursor-pointer" type="submit" value="Crear Cuenta")
 
     script.
         document.querySelectorAll('.alert').forEach(error => {
