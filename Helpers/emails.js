@@ -24,8 +24,8 @@ const registerEmail = async (data) => {
                 <h3>Confirmación de correo</h3>
             </header>
             <div style="font-family: bold, sans-serif; text-align: justify; line-height: 1.6; color: #333; background-color: #f9f9f9; padding: 25px; border: 10px solid #ddd; border-radius: 5px;">
-                <h2 style="color: #50c878;">¡Hola, <span style="color: #50c878;">${name}</span>!</h2>
-                <div style="padding: 35px; border: dashed #50c878; border-radius: 30px;">
+                <h2 style="color:#E2CFEA;">¡Hola, <span style="color: #E2CFEA;">${name}</span>!</h2>
+                <div style="padding: 35px; border-radius: 30px;">
                     <p style="font-size: 18px;">
                         ¡Gracias por registrarte en <strong>BienesRaices_230415</strong>! Para completar el proceso de confirmación de tu cuenta y acceder a todos nuestros servicios, necesitamos la confirmación de tu correo electrónico.
                     </p>
@@ -35,21 +35,21 @@ const registerEmail = async (data) => {
                         </p>
                         <div style="text-align: center; margin: 20px 0;">
                             <a href="${process.env.BACKEND_URL}:${process.env.PORT ?? 3000}/auth/confirm/${token}" 
-                               style="background-color: #50c878; color: white; text-decoration: none; padding: 10px 20px; border-radius: 5px; font-size: 16px;">
+                               style="background-color:#E2CFEA; color: white; text-decoration: none; padding: 10px 20px; border-radius: 5px; font-size: 16px;">
                                Confirmar Cuenta
                             </a>
                         </div>
                     </div>
-                    <p style="font-size: 18px; color: #666;">
+                    <p style="font-size: 18px; color: #8ACDEA;">
                         Si no reconoces esta solicitud o no creaste la cuenta, puedes ignorar este mensaje. ¡Gracias por elegirnos! Estamos emocionados por poder ayudarte a encontrar la propiedad deseada.
                     </p>
                     <div style="text-align: center; line-height: 1.6;">
-                        <p style="font-size: 20px; color: #666;">
+                        <p style="font-size: 20px; color:#8ACDEA;">
                             Atentamente, <br>
                             <strong>Ana Daniela Lopez Neri</strong>
                         </p>
                          <div style="margin-bottom: 15px;">
-                            <img src="https://lh3.googleusercontent.com/pw/AP1GczOqyY_KoRU97oqOrExRcinNI02hEyNxTdEwMA2pK5v4ByWLP6_fn7gGIKYpznPMssC9ki95Gz_V6kiudDpLMJHHtrevK6ZhignoLDgguI3zgGNleBR3gtzxqik0xotsBZMESPUkFO3VvhztfCUSm7X_=w214-h98-s-no-gm?authuser=0" alt="Firma" style="max-width: 150px; border-radius: 5px;">
+                            <img src="https://lh3.googleusercontent.com/pw/AP1GczMr01NFr2UJP8GHZcxrd0oNo7ZyRjzgzojXCGJqi0L4mEo0aNn5ExVtWT6UkpBW3MzdolQu98pZlOl4_z5x1UjVyXQ_y378bWeDFVUy3bZg7PGHwjmhZt77VeQVI4FkZtMgkWWROGvUJfL-o0LmCMZb=w374-h49-s-no-gm?authuser=0" alt="Firma de Ana Daniela López Neri" />
                         </div>
                     </div>
                 </div>
@@ -84,8 +84,8 @@ const passwordRecoveryEmail = async (data) => {
                 <h3>Recuperación de contraseña</h3>
             </header>
             <div style="font-family: bold, sans-serif; text-align: justify; line-height: 1.6; color: #333; background-color: #f9f9f9; padding: 25px; border: 10px solid #ddd; border-radius: 5px;">
-                <h2 style="color: #50c878;">¡Hola, <span style="color: #50c878;">${name}</span>!</h2>
-                <div style="padding: 35px; border: dashed #50c878; border-radius: 30px;">
+                <h2 style="color:#E2CFEA;">¡Hola, <span style="color:#E2CFEA;">${name}</span>!</h2>
+                <div style="padding: 35px; border-radius: 30px;">
                     <p style="font-size: 18px;">
                         Hemos recibido una solicitud para restablecer la contraseña de tu cuenta en <strong>BienesRaices_230415</strong>.
                     </p>
@@ -95,21 +95,20 @@ const passwordRecoveryEmail = async (data) => {
                         </p>
                         <div style="text-align: center; margin: 20px 0;">
                             <a href="${process.env.BACKEND_URL}:${process.env.PORT ?? 3000}/auth/passwordRecovery/${token}" 
-                               style="background-color: #50c878; color: white; text-decoration: none; padding: 10px 20px; border-radius: 5px; font-size: 16px;">
+                               style="background-color: #E2CFEA; color: white; text-decoration: none; padding: 10px 20px; border-radius: 5px; font-size: 16px;">
                                Restablecer Contraseña
                             </a>
                         </div>
                     </div>
-                    <p style="font-size: 18px; color: #666;">
+                    <p style="font-size: 18px; color:#8ACDEA;">
                         Si no solicitaste este cambio, puedes ignorar este mensaje. Tu cuenta seguirá siendo segura.
                     </p>
                     <div style="text-align: center; line-height: 1.6;">
-                        <p style="font-size: 20px; color: #666;">
+                        <p style="font-size: 20px; color: #8ACDEA;">
                             Atentamente, <br>
                             <strong>Ana Daniela Lopez Neri</strong>
                         </p>
-                         <div style="margin-bottom: 15px;">
-                            <img src="https://lh3.googleusercontent.com/pw/AP1GczOqyY_KoRU97oqOrExRcinNI02hEyNxTdEwMA2pK5v4ByWLP6_fn7gGIKYpznPMssC9ki95Gz_V6kiudDpLMJHHtrevK6ZhignoLDgguI3zgGNleBR3gtzxqik0xotsBZMESPUkFO3VvhztfCUSm7X_=w214-h98-s-no-gm?authuser=0" alt="Firma" style="max-width: 150px; border-radius: 5px;">
+                                                     <img src="https://lh3.googleusercontent.com/pw/AP1GczMr01NFr2UJP8GHZcxrd0oNo7ZyRjzgzojXCGJqi0L4mEo0aNn5ExVtWT6UkpBW3MzdolQu98pZlOl4_z5x1UjVyXQ_y378bWeDFVUy3bZg7PGHwjmhZt77VeQVI4FkZtMgkWWROGvUJfL-o0LmCMZb=w374-h49-s-no-gm?authuser=0" alt="Firma de Ana Daniela López Neri" />
                         </div>
                     </div>
                 </div>
